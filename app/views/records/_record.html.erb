@@ -1,0 +1,40 @@
+<div class="record-wrapper">
+  <div id="<%= dom_id record %>" class="record-container">
+    <div class="record-image">
+      <% if record.image.attached? %>
+        <%= image_tag record.image.variant(resize_to_limit: [300, 300]) %>
+      <% else %>
+        <p>No image attached.</p>
+      <% end %>
+    </div>
+    <div class="record-details">
+      <p><%= record.title %></p>
+      <p><%= record.artist %></p>
+      <p><%= record.description %></p>
+      <% url = record.youtube_url %>
+      <% url = "https://#{url}" unless url =~ /\Ahttp(s)?:\/\// %>
+      <%= link_to "Click", url, target: "_blank", rel: "noopener noreferrer" %>
+    </div>
+  </div>
+</div>
+
+<style>
+.record-wrapper {
+  margin-bottom: 25px;
+}
+/* Make the container shrink-wrap its content (the record image),
+   so that the text below aligns with the image's left edge */
+.record-container {
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.record-details {
+  margin-top: 5px;
+}
+p {
+  margin-top: 0.2em;  /* Adjust as needed */
+  margin-bottom: 0.2em; /* Adjust as needed */
+}
+</style>

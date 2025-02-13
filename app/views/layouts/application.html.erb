@@ -23,6 +23,25 @@
   </head>
 
   <body>
-    <%= yield %>
+<header style="position: sticky; top: 0; background: white; display: flex; align-items: center; padding: 10px 20px;">
+  <!-- Left: Search bar -->
+  <div style="flex: 1; text-align: left;">
+    <%= form_with url: records_path, method: :get, local: true do |f| %>
+      <%= f.text_field :query, placeholder: "Search...", value: params[:query] %>
+      <%= f.submit "Search" %>
+    <% end %>
+  </div>
+
+  <!-- Center: Title -->
+  <div style="flex: 1; text-align: center;">
+    <%= link_to root_path, style: "text-decoration: none; color: inherit;" do %>
+      <h1 style="margin: 0;">1978</h1> 
+    <% end %>
+  </div>
+
+  <!-- Right: Empty div to balance layout -->
+  <div style="flex: 1;"></div>
+</header>   
+<%= yield %>
   </body>
 </html>

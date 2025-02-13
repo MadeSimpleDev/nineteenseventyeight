@@ -1,0 +1,15 @@
+<h2>Admin Sign In</h2>
+
+<%= form_with url: session_path, method: :post, local: true do |f| %>
+  <div>
+    <%= f.label :email_address %>
+    <%= f.email_field :email_address, required: true %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password, required: true %>
+  </div>
+  <div>
+    <%= f.submit "Sign In" %>
+  </div>
+<% end %>
