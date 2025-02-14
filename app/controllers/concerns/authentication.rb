@@ -23,8 +23,6 @@ module Authentication
 
     def resume_session
       Current.session ||= find_session_by_cookie
-    # Assign Current.user if it's not already set
-    Current.user ||= session.user
     end
 
     def find_session_by_cookie
@@ -43,7 +41,11 @@ module Authentication
     def start_new_session_for(user)
       user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
         Current.session = session
+        Rails.logger.info ">>>Created new session with id: #{Current.session.id}"
+
         cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax }
+        Rails.logger.info ">>>Stored custom session key: #{cookies.signed.permanent[:session_id]}"
+        Rails.logger.info ">>> Set cookies for session #{session.id}"
       end
     end
 

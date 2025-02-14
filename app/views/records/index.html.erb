@@ -3,17 +3,16 @@
 <% content_for :title, "Records" %>
 
 <div id="records">
+<% if authenticated? %>
+  <%= link_to "Add new record", new_record_path %>
+<% end %>  
   <% @records.each do |record| %>
     <%= render record %>
-<% if Current.user %>
+<% if authenticated? %>
     <p>
-      <%= link_to "Show this record", record %>
+      <%= link_to "Edit this record", record %>
     </p>
 <% end %>
 
   <% end %>
 </div>
-
-<% if Current.user %>
-  <%= link_to "New record", new_record_path %>
-<% end %>

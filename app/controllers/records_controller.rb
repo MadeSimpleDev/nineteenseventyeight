@@ -4,13 +4,11 @@ class RecordsController < ApplicationController
 
   # GET /records or /records.json
   def index
-    @user = Current.user
-    @records = Record.all
     if params[:query].present?
       query = "%#{params[:query]}%"
       @records = Record.where("title LIKE ? OR artist LIKE ?", query, query)
     else
-      @records = Record.all
+      @records = Record.order(created_at: :desc)
     end
   end
 
