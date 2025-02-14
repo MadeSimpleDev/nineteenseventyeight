@@ -4,15 +4,14 @@
 
 <div id="records">
 <% if authenticated? %>
+<div>
   <%= link_to "Add new record", new_record_path %>
+</div>
 <% end %>  
   <% @records.each do |record| %>
-    <%= render record %>
-<% if authenticated? %>
-    <p>
+    <% if authenticated? %>
       <%= link_to "Edit this record", record %>
-    </p>
-<% end %>
-
+    <% end %>
+    <%= render record %>
   <% end %>
 </div>
