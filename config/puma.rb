@@ -39,3 +39,9 @@ plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"]
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # In other environments, only set the PID file if requested.
 pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+
+# Preload the application before forking workers for faster worker spawn times.
+preload_app!
+
+# Bind to a TCP socket, listening on localhost.
+bind "tcp://127.0.0.1:3000"
