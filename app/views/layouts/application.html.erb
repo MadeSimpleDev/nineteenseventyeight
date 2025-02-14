@@ -35,13 +35,17 @@
   <!-- Center: Title -->
   <div style="flex: 1; text-align: center;">
     <%= link_to root_path, style: "text-decoration: none; color: inherit;" do %>
-      <h1 style="margin: 0;">1978</h1> 
+      <h1 style="margin: 0;">1978</h1>
     <% end %>
   </div>
 
-  <!-- Right: Empty div to balance layout -->
-  <div style="flex: 1;"></div>
-</header>   
+  <!-- Right: Logout button (only if a user is signed in) -->
+  <div style="flex: 1; text-align: right;">
+    <% if Current.user %>
+      <%= button_to "Logout", session_path, method: :delete, form: { style: "display: inline;" } %>
+    <% end %>
+  </div>
+</header>
 <%= yield %>
   </body>
 </html>
