@@ -24,11 +24,13 @@
 
   <body>
 <header style="position: sticky; top: 0; background: white; display: flex; align-items: center; padding: 10px 20px;">
-  <!-- Left: Search bar -->
+  <!-- Left: Search bar (only if signed in) -->
   <div style="flex: 1; text-align: left;">
-    <%= form_with url: records_path, method: :get, local: true do |f| %>
-      <%= f.text_field :query, placeholder: "Search...", value: params[:query] %>
-      <%= f.submit "Search" %>
+    <% if Current.user %>
+      <%= form_with url: records_path, method: :get, local: true do |f| %>
+        <%= f.text_field :query, placeholder: "Search...", value: params[:query] %>
+        <%= f.submit "Search" %>
+      <% end %>
     <% end %>
   </div>
 
@@ -39,7 +41,7 @@
     <% end %>
   </div>
 
-  <!-- Right: Logout button (only if a user is signed in) -->
+  <!-- Right: Logout button (only if signed in) -->
   <div style="flex: 1; text-align: right;">
     <% if Current.user %>
       <%= button_to "Logout", session_path, method: :delete, form: { style: "display: inline;" } %>
